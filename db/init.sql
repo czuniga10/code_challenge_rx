@@ -17,6 +17,6 @@ CREATE TABLE users (
 
 INSERT INTO users ( first_name, last_name, phone, email )
 VALUES
-    ('Chad', 'Zuniga', '7856437859' 'czuniga@thumbtack.com'),
-    ('Test', 'Test', '(555) 555-5555' 'test@thumbtack.com')
+    ('Chad', 'Zuniga', '7856437859', 'czuniga@thumbtack.com'),
+    ('Test', 'Test', '(555) 555-5555', 'test@thumbtack.com')
 ;
