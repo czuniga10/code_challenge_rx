@@ -10,5 +10,5 @@ addMiddleware(app);
 delegateRoutes(app);
 
 app.listen(port, () => {
-    console.log(`===================================\n Server Listening on port ${port}. \n ===================================`);
+    console.log(`===================================\n   Server Listening on port ${port} \n===================================`);
 });
