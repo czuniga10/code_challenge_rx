@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+// import { getUsersInfo } from './actions/actionCreators';
+import { getUsers } from './services/user.service';
+import UserItem from './UserItem';
+
 
 const styles = theme => ({
   textField: {
@@ -20,18 +24,37 @@ class App extends Component {
   constructor(props) {
     super(props) 
       this.state={
-
+        users: []
       }
   }
 
   componentDidMount(){
-    
+    getUsers()
+      .then(res => {
+        console.log(res.data);
+        let userData = res.data;
+        this.setState({users: userData})
+      })
   }
 
   render() {
     const { classes } = this.props;
+    const users = this.state.users;
+    const displayUserItems = users.map(user => {
+      const index = users.indexOf(user);
+      return (<UserItem 
+        key={index}
+        index={index}
+        id={user.id}
+        firstName={user.first_name}
+        lastName={user.last_name}
+        phone={user.phone}
+        email={user.email}
+        />)
+    })
     return (
       <div className="App">
+
         <form className={classes.container} noValidate autoComplete="off">
           <TextField
             id="standard-dense"
@@ -57,8 +80,9 @@ class App extends Component {
             className={classNames(classes.textField, classes.dense)}
             margin="dense"
           />
+          
         </form>
-
+        {displayUserItems}
       </div>
     );
   }
