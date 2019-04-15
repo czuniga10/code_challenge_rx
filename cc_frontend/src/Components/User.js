@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
+import './User.css';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { getUser, getUsers, createUser, updateUser } from './services/user.service';
+import { getUser, getUsers, createUser, updateUser } from '../services/user.service';
 import UserItem from './UserItem';
 
 const styles = theme => ({
@@ -23,12 +23,12 @@ class App extends Component {
     super(props) 
       this.state={
         users: [],
+        id: '',
         first_name: '',
         last_name: '',
         phone: '',
         email: '',
-        save_button_visible: true,
-        update_button_visible: false
+        save_button_visible: true
       }
     this.refresh = this.refresh.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -41,6 +41,7 @@ class App extends Component {
     this.refresh();
   }
 
+  //
   refresh() {
     getUsers()
       .then(res => {
@@ -50,6 +51,7 @@ class App extends Component {
       })
   }
 
+  //adds text in text field to state
   handleInputChange(e){
     const key = e.target.name;
     let newState = this.state[key];
@@ -58,6 +60,7 @@ class App extends Component {
     this.setState({ [key]: newState });
   }
 
+  //sends new user data to DB
   handleSubmit() {
     const first_name = this.state.first_name;
     const last_name = this.state.last_name;
@@ -75,6 +78,7 @@ class App extends Component {
       })
         .catch(err => {throw err})
     this.setState({
+      id: '',
       first_name: '',
       last_name: '',
       phone: '',
@@ -82,12 +86,10 @@ class App extends Component {
     })
   }
 
+  //sends updated data to DB
   handleUpdateSubmit() {
-    const first_name = this.state.first_name;
-    const last_name = this.state.last_name;
-    const phone = this.state.phone;
-    const email = this.state.email;
-    const body = { first_name, last_name, phone, email}
+    const {first_name, last_name, phone, email, id} = this.state;
+    const body = { id, first_name, last_name, phone, email}
     updateUser(body)
       .then( res => {
           if (res.status !== 200) {
@@ -99,6 +101,8 @@ class App extends Component {
       })
         .catch(err => {throw err})
     this.setState({
+      save_button_visible: true,
+      id: '',
       first_name: '',
       last_name: '',
       phone: '',
@@ -106,11 +110,14 @@ class App extends Component {
     })
   }
 
+  //populates text fields with data for update
   handlePopulate(id) {
     getUser(id)
       .then(res => {
         console.log(res.data[0]);
         this.setState({
+          save_button_visible: false,
+          id: id,
           first_name: res.data[0].first_name,
           last_name: res.data[0].last_name,
           phone: res.data[0].phone,
@@ -177,8 +184,8 @@ class App extends Component {
             className={classNames(classes.textField, classes.dense)}
             margin="dense"
           />
-          <button type='button' className="button" onClick={ e => {this.handleSubmit(e)} }>save</button>
-          <button type='button' className="button" onClick={ e => {this.handleUpdateSubmit(e)} }>update</button>
+          <button type='button' className={this.state.save_button_visible ? "add-button-true" : "add-button-false"} onClick={ e => {this.handleSubmit(e)} }>save</button>
+          <button type='button' className={!this.state.save_button_visible ? "update-button-true" : "update-button-false"} onClick={ e => {this.handleUpdateSubmit(e)} }>update</button>
         </form>
         {displayUserItems}
       </div>

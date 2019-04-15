@@ -30,10 +30,9 @@ userRouter.post('/create', (req, res) => {
 });
 //update user by id
 //postman test worked
-userRouter.put('/update/:id', (req, res) => {
+userRouter.put('/update', (req, res) => {
     const db = getDb();
-    const id = req.params.id;
-    const { first_name, last_name, phone, email } = req.body;
+    const { id, first_name, last_name, phone, email } = req.body;
     db.UPDATE.update_user([id, first_name, last_name, phone, email])
         .then( promise => res.status(200).send(promise))
         .catch( err => res.status(500).send(err) )

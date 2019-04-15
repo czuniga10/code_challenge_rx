@@ -23,9 +23,9 @@ function createUser( body ) {
         .catch( err => {throw err} );
 }
 
-function updateUser( id, body ) {
+function updateUser( body ) {
     return axios
-        .put(`${baseURL}/update/${id}`, body)
+        .put(`${baseURL}/update`, body)
         .then( res => res )
         .catch( err => {throw err} );
 }

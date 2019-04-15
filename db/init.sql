@@ -15,8 +15,8 @@ CREATE TABLE users (
 
 --Inserts test data into tables
 
-INSERT INTO users ( first_name, last_name, phone, email )
-VALUES
-    ('Chad', 'Zuniga', '7856437859', 'czuniga@thumbtack.com'),
-    ('Test', 'Test', '(555) 555-5555', 'test@thumbtack.com')
-;
+-- INSERT INTO users ( first_name, last_name, phone, email )
+-- VALUES
+--     ('Chad', 'Zuniga', '7856437859', 'czuniga@thumbtack.com'),
+--     ('Test', 'Test', '(555) 555-5555', 'test@thumbtack.com')
+-- ;

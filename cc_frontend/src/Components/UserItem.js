@@ -7,7 +7,7 @@ class UserItem extends Component {
         }
     }
     render() {
-        const {id, firstName, lastName, phone, email, handlePopulate, handleUpdateSubmit} = this.props;
+        const {id, firstName, lastName, phone, email, handlePopulate} = this.props;
 
         return(
             
