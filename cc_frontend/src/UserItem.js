@@ -7,25 +7,24 @@ class UserItem extends Component {
         }
     }
     render() {
-        const {firstName, lastName, phone, email} = this.props;
+        const {id, firstName, lastName, phone, email, handlePopulate, handleUpdateSubmit} = this.props;
 
         return(
             
-                <div className="proj-holder">
-                    <div className="type">
+                <div className="user-holder" onClick={ () => handlePopulate(id) }>
+                    <div className="info">
                         {firstName}
                     </div>
-                    <div className="reps">
+                    <div className="info">
                         {lastName}
                     </div>
-                    <div className="weight">
+                    <div className="info">
                         {phone}
                     </div>
-                    <div className="email" >
+                    <div className="info" >
                         {email}
-                    </div>
+                    </div> 
                 </div> 
-        // </Link>
         )
     }
 }

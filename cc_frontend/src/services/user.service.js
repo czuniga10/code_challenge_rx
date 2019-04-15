@@ -16,6 +16,13 @@ function getUsers() {
         .catch( err => {throw err} );
 }
 
+function createUser( body ) {
+    return axios
+        .post(`${baseURL}/create`, body)
+        .then( res => res )
+        .catch( err => {throw err} );
+}
+
 function updateUser( id, body ) {
     return axios
         .put(`${baseURL}/update/${id}`, body)
@@ -23,8 +30,17 @@ function updateUser( id, body ) {
         .catch( err => {throw err} );
 }
 
+function deleteUser( id ) {
+    return axios
+        .delete(`${baseURL}/delete/${id}`)
+        .then( res => res )
+        .catch( err => {throw err} );
+}
+
 export {
     getUser,
     getUsers,
-    updateUser
+    createUser,
+    updateUser,
+    deleteUser
 };
