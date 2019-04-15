@@ -41,7 +41,7 @@ class App extends Component {
     this.refresh();
   }
 
-  //
+  //gets user data form db
   refresh() {
     getUsers()
       .then(res => {
